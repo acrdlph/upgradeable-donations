@@ -1,0 +1,11 @@
+{
+  "zosversion": "2",
+  "name": "upgradeable-donations",
+  "version": "0.1.0",
+  "contracts": {
+    "Donations": "Donations"
+  },
+  "dependencies": {
+    "openzeppelin-eth": "^2.0.2"
+  }
+}
