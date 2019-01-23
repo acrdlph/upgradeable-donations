@@ -1,11 +1,11 @@
 {
   "contracts": {
     "Donations": {
-      "address": "0x5f8e26facc23fa4cbd87b8d9dbbd33d5047abde1",
-      "constructorCode": "608060405234801561001057600080fd5b50610b36806100206000396000f300",
-      "bodyBytecodeHash": "5ed43120ff65e69eb103a1315e9b01dccfcdf9659fb8d69fda27425425d807e0",
-      "localBytecodeHash": "f61fd05331195465c54c89e0ac7804b4305cd52d9df738e52b5b884961afb10f",
-      "deployedBytecodeHash": "f61fd05331195465c54c89e0ac7804b4305cd52d9df738e52b5b884961afb10f",
+      "address": "0xe33cde1af7ce567963d5eddf23c01fd1770140a2",
+      "constructorCode": "608060405234801561001057600080fd5b50610fd1806100206000396000f300",
+      "bodyBytecodeHash": "9f75856e1d32c847e5a493260615829991ecbf854c402bcd95c56cad6e8e0123",
+      "localBytecodeHash": "32c16ae1cd5bb157a002dd5d250be5100cb071e9aff5086fb3b9f73d4b36416d",
+      "deployedBytecodeHash": "32c16ae1cd5bb157a002dd5d250be5100cb071e9aff5086fb3b9f73d4b36416d",
       "types": {
         "t_bool": {
           "id": "t_bool",
@@ -28,6 +28,11 @@
           "id": "t_address",
           "kind": "elementary",
           "label": "address"
+        },
+        "t_string": {
+          "id": "t_string",
+          "kind": "elementary",
+          "label": "string"
         }
       },
       "storage": [
@@ -35,7 +40,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 1412,
+          "astId": 1453,
           "type": "t_bool",
           "src": "757:24:12"
         },
@@ -43,7 +48,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 1414,
+          "astId": 1455,
           "type": "t_bool",
           "src": "876:25:12"
         },
@@ -51,7 +56,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 1463,
+          "astId": 1504,
           "type": "t_array:50<t_uint256>",
           "src": "1891:29:12"
         },
@@ -59,7 +64,7 @@
           "contract": "Ownable",
           "path": "openzeppelin-eth/contracts/ownership/Ownable.sol",
           "label": "_owner",
-          "astId": 537,
+          "astId": 578,
           "type": "t_address",
           "src": "301:22:6"
         },
@@ -67,7 +72,7 @@
           "contract": "Ownable",
           "path": "openzeppelin-eth/contracts/ownership/Ownable.sol",
           "label": "______gap",
-          "astId": 642,
+          "astId": 683,
           "type": "t_array:50<t_uint256>",
           "src": "2057:29:6"
         },
@@ -75,17 +80,33 @@
           "contract": "Donations",
           "path": "contracts/Donations.sol",
           "label": "token",
-          "astId": 23,
+          "astId": 26,
           "type": "t_address",
-          "src": "492:27:0"
+          "src": "553:27:0"
         },
         {
           "contract": "Donations",
           "path": "contracts/Donations.sol",
           "label": "numEmittedTokens",
-          "astId": 25,
+          "astId": 28,
           "type": "t_uint256",
-          "src": "525:31:0"
+          "src": "586:31:0"
+        },
+        {
+          "contract": "Donations",
+          "path": "contracts/Donations.sol",
+          "label": "minDonation",
+          "astId": 30,
+          "type": "t_uint256",
+          "src": "669:26:0"
+        },
+        {
+          "contract": "Donations",
+          "path": "contracts/Donations.sol",
+          "label": "contractName",
+          "astId": 32,
+          "type": "t_string",
+          "src": "701:26:0"
         }
       ],
       "warnings": {
@@ -98,14 +119,22 @@
     }
   },
   "solidityLibs": {},
-  "proxies": {},
+  "proxies": {
+    "upgradeable-donations/Donations": [
+      {
+        "address": "0x860a267ae06d8c622c7d28ae3730a4d7375237e8",
+        "version": "0.1.0",
+        "implementation": "0xe33cde1af7ce567963d5eddf23c01fd1770140a2"
+      }
+    ]
+  },
   "zosversion": "2",
+  "version": "0.1.0",
   "dependencies": {
     "openzeppelin-eth": {
-      "package": "0x67b5656d60a809915323bf2c40a8bef15a152e3e",
+      "package": "0x1b64abac3d687ff0d18a10ead548e952b40936e6",
       "version": "2.0.2",
       "customDeploy": true
     }
-  },
-  "version": "0.1.0"
+  }
 }
