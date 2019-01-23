@@ -1,4 +1,4 @@
-# Exploring upgradeability with zeppelinOS
+# Exploring upgradeability with ZeppelinOS
 
 ## Overview
 
@@ -88,8 +88,8 @@ function increaseMinDonation() public {
 Then we run:
 
 ```
-Zos push 
-Zos update Donations
+zos push 
+zos update Donations
 ```
 And a new logic contract gets deployed that automatically points at the same proxy. We can verify this:
 ```
@@ -100,7 +100,7 @@ contract.minDonation.call().then(res=>{num=res}) // 5
 ```
 
 
-## Notes on deviations from the official docs
+## Deviations from official docs
 
 ### Manually add truffle
 
@@ -124,4 +124,4 @@ zos session --network local --from <nonDefaultAddress> --expires 3600
 ```
 
 ### Calling functions through truffle console
-
+The approach to calling functions on the deployed proxy contract through truffle described in the docs, did not work for me: Instead of `myContract = MyContract.at('<your-contract-address>')` I had to use `MyContract.deployed().then(instance => {...})`.
