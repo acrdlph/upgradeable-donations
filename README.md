@@ -2,19 +2,19 @@
 
 ## Overview
 
-This is a simple contract that can receive donations and mints a ERC721 token in exchange. It demonstrates the use of zeppelinOS to make smart contracts upgradeable.
+This is a simple contract that can receive donations and mints an ERC721 token in exchange. It demonstrates the use of zeppelinOS to make smart contracts upgradeable.
 
 ## Upgradeability
 
-Smart contract upgradeability can be achieved by separating the storage of a contract from its logic. The user interacts with a proxy that holds the storage and delegetecalls the logic in a referenced contract. That reference can be updated, when a new logic contract should be used. The big potential problem is that the logic contract could overwrite the storage of the proxy. There are [different ways](https://blog.zeppelinos.org/proxy-patterns/) to avoid this. ZeppelinOS uses [unstructured storage](https://github.com/zeppelinos/labs/tree/master/upgradeability_using_unstructured_storage) which allows the logic contracts to live independently of the proxy and only with [minor modifications](https://docs.zeppelinos.org/docs/writing_contracts.html) as compared to regular contracts.
+Smart contract upgradeability can be achieved by separating the storage of a contract from its logic. The user interacts with a proxy that holds the storage and delegetecalls the logic in a referenced contract. That reference can be updated, when a new logic contract should be used. The big problem with this appraoch is storage collision: The logic contract could accidentally overwrite important parts of the storage of the proxy (for example the address of the referenced logic contract). There are [various ways](https://blog.zeppelinos.org/proxy-patterns/) to avoid this. ZeppelinOS uses [unstructured storage](https://github.com/zeppelinos/labs/tree/master/upgradeability_using_unstructured_storage) which allows the logic contracts to live independently of the proxy and only with [minor modifications](https://docs.zeppelinos.org/docs/writing_contracts.html) as compared to regular contracts.
 
 ## ZeppelinOS Documentation
 
-Zeppelin has a lot of guides and tutorials and it gets a bit wild because many of them are outdated, but the current docs at https://docs.zeppelinos.org are very well organized and thorough. In addition, [this hidden page](https://docs.zeppelinos.org/docs/low_level_contract.html) gives a very good low-level understanding of the various steps that are abstracted by the zos CLI commands.
+Zeppelin has a lot of guides and tutorials and it gets a bit wild because many of them are outdated, but the current docs at https://docs.zeppelinos.org are very well organized and thorough. [This page](https://docs.zeppelinos.org/docs/pattern.html) explains the theory behind the unstructured storage approach very well. In addition, [this hidden page](https://docs.zeppelinos.org/docs/low_level_contract.html) gives a very good low-level understanding of the various steps that are abstracted by the ZeppelinOS CLI commands.
 
 ## All steps to implement upgradeability
 
-This is new stuff, so even though most of it is well explained in the docs, I will outline all the necessary steps to create an upgradeable project using the contract in this repository as an example. The first 3 steps are pretending that we are starting with an empty slate. If you run `npm install` on this repository you can jump in straight to "Interact with contract".
+This is new stuff, so even though most of it is well explained in the docs, I will outline all the necessary steps to create an upgradeable project using the contract in this repository as an example. The first 3 steps are pretending that we are starting with an empty slate. If you run `npm install` on this repository you can jump straight to starting a local blockchain and deploying the project on it.
 
 ### Create zos project
 
@@ -85,7 +85,7 @@ function increaseMinDonation() public {
 }
 ```
 
-Then we run:
+Then run:
 
 ```
 zos push 
@@ -116,7 +116,7 @@ compilers: {
 
 ### ProxyAdmin cannot make function calls
 
-It is also important to start a session with an address that is different from the default sender address in your ganache setup:
+It is important to start a session with an address that is different from the default sender address in your ganache setup. This is mentioned in the [docs](https://docs.zeppelinos.org/docs/pattern.html) as the "transparent proxy issue", but nevertheless a common source of error.
 
 ```
 zos session --network local --from <nonDefaultAddress> --expires 3600
